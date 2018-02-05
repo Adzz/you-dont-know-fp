@@ -20,3 +20,4 @@
 	```
 
 	- `isLongEnough(..)` is the negation of `isShortEnough(..)`.
+
