@@ -107,7 +107,7 @@ function add(x, y) {
 
 var fifteen = add(10, 5) // => function() { 10 + 5}
 ```
-fifteen puts the numbers in the function context.
+`fifteen()` puts the numbers in the function context.
 
 ### Referential Transparency
 
@@ -138,9 +138,23 @@ One way to solve this is to return the log as well, perhaps in an array.
 ```js
 function thing(y) {
   log = Logger.addToLog("Thing")
-  return y + 10
+  return [log, y + 10]
 }
 ```
+
+The writer monad is a way of making logging referentially transparant? By returning the log as part of the response, we restore the referential transparancy of the function.
+
+Can we do this for any side effect?
+
+```js
+var x = 10
+function thing(y) {
+  newX = x;
+  log = Logger.addToLog("Thing")
+  return [log, newX++, y + 10]
+}
+```
+
 
 ### Specificity and Generalisation
 
@@ -179,13 +193,12 @@ Once we've curried the function, and we provided a ten to it, the function is no
 A good use case for either of them is changing a binary or unary function into a function that takes one argument so that we can more easily compose them.
 
 
+Date is always the most specific input, which is why it's always on the right hand side. That means you can delay the specificity until the very last moment. This is why elixir is a bit weird. It does it the other way meaning you can pipe things gratutiously. However the f*ck you spell that word.
 
 
 
+### Transducers
 
-
-
-
-
+A way to compose reducers, even though reducing functions take more than one arg and so is a bit messy usually.
 
 
